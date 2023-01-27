@@ -125,14 +125,14 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
             //backgroundColor: Colors.purple.shade400,
             //selecting an active icon and giving it color
             activeIcon: Icon(Icons.home,
-            color: Colors.white,
+            color: Colors.amberAccent.shade100,
               size: 30,
             ),
               //displaying icon
               icon: Icon(
                 //this will change of the icon
                 Icons.home_outlined,
-                color: Colors.black,
+                color: Colors.white,
                 size: 30,
               ),
             label: "",
@@ -142,12 +142,12 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
             //backgroundColor: Colors.purple.shade300,
             activeIcon: Icon(
               Icons.search,
-              color: Colors.white,
+              color: Colors.amberAccent.shade100,
               size: 30,
             ),
             icon: Icon(
               Icons.search_outlined,
-              color: Colors.black,
+              color: Colors.white,
               size: 30,
             ),
             label: "",
@@ -156,12 +156,12 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
             //backgroundColor: Colors.purple.shade200,
             activeIcon: Icon(
               Icons.bookmark,
-              color: Colors.white,
+              color: Colors.amberAccent.shade100,
               size: 30,
             ),
             icon: Icon(
               Icons.bookmark_added_outlined,
-              color: Colors.black,
+              color: Colors.white,
               size: 30,
             ),
             label: "",
@@ -170,12 +170,12 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
             //backgroundColor: Colors.purple.shade100,
             activeIcon: Icon(
               Icons.settings,
-              color: Colors.white,
+              color: Colors.amberAccent.shade100,
               size: 30,
             ),
             icon: Icon(
               Icons.settings_outlined,
-              color: Colors.black,
+              color: Colors.white,
               size: 30,
             ),
             label: "",
