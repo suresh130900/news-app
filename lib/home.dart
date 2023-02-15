@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:news_app/views/home_inner.dart';
+import 'package:news_app/views/profile.dart';
 import 'package:news_app/views/search.dart';
 
 class home extends StatefulWidget {
@@ -55,7 +56,7 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
       //for the buttons on the bottom
       drawer: Drawer(
         child: ListView(
-          children: const <Widget>[
+          children: <Widget>[
             DrawerHeader(
                 child: Text("Menu",
                   style: TextStyle(color: Colors.white, fontSize: 25),
@@ -67,28 +68,31 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
                       image: NetworkImage('https://st.depositphotos.com/1152339/1972/i/600/depositphotos_19723583-stock-photo-news-concept-news-on-digital.jpg'))),
             ),
             ListTile(
+              onTap: (){
+                print("Welcome Button is Pressed");
+              },
               leading: Icon(
                 Icons.input,
               ),
               title: Text("Welcome"),
             ),
             ListTile(
+              onTap: (){
+                print("Settings Button is Pressed");
+              },
               leading: Icon(
                 Icons.settings,
               ),
               title: Text("Settings"),
             ),
             ListTile(
+              onTap: (){
+                print("FeedBack Button is Pressed");
+              },
               leading: Icon(
                 Icons.border_color,
               ),
               title: Text("Feedback"),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.exit_to_app,
-              ),
-              title: Text("Logout"),
             ),
           ],
         ),
@@ -171,7 +175,10 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
           Center(
             child: search(),
           ),
-          HomeInner(),
+          //HomeInner(),
+          Center(
+            child: profile(),
+          )
         ],
       ),
     );

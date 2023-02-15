@@ -45,29 +45,29 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
               Row(
                 children: [
                   Flexible(
-                    flex: 3,
+                    flex: 1,
                       child: TextField(
                         cursorColor: Colors.grey,
-                        cursorHeight: 40,
+                        cursorHeight: 25,
                         decoration: InputDecoration(
-                          fillColor: Colors.white,
+                          fillColor: Colors.black,
                           filled: true,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(15),
                               borderSide: BorderSide.none
                           ),
                           hintText: 'Search',
                             hintStyle: TextStyle(
                                 color: Colors.grey,
-                                fontSize: 30
+                                fontSize: 20
                             ),
                           prefixIcon: Container(
                             padding: EdgeInsets.all(15),
-                            width: 30,
+                            width: 10,
                             child: Icon(
                               Icons.search_rounded,
                               color: Colors.grey,
-                              size: 30,
+                              size: 28,
                             ),
                           )
                         ),
@@ -81,6 +81,10 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
                 itemCount: categories.length,
                 itemBuilder: (BuildContext context , int index){
                   return ListTile(
+                    onTap: (){
+
+                      print(categories[index]);
+                    },
                     title: Text(
                       categories[index],
                     ),

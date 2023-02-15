@@ -25,6 +25,7 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
   late AnimationController _controller;
 
   List<NewsModel> news1 = <NewsModel>[];
+  List<String> categories = ["World","Business","Sports","Tech","HealthCare","Science"];
 
   fetchMovies() async {
     var data = await news.getJson();
@@ -82,13 +83,46 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
                       (BuildContext context,int index) {
                     return Container(
                       height: 100,
-                      child: Image(
+                      child: news1[index].urlToImage != null ? Image(
                         image: NetworkImage(news1[index].urlToImage),
+                      ) : Image.network(
+                        "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                        height: 300,
+                        width: 120,
                       ),
                     );
-                  }),
+                  },
+              ),
             ),
-
+            Container(
+              height: 60,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: categories.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index){
+                  return  Container(
+                      width: 90,
+                      child: GestureDetector(
+                        onTap: () {
+                          print(categories[index]);
+                        },
+                        child: Chip(
+                          padding: EdgeInsets.all(8),
+                          elevation: 20,
+                          shadowColor: Colors.black,
+                          label: Text(
+                            categories[index],
+                            style: TextStyle(
+                                color: Colors.amberAccent.shade100
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                },
+              ),
+            ),
             Container(
               child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
@@ -96,13 +130,19 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
                   itemCount: news1.length,
                   itemBuilder: (BuildContext context, int i) {
                     return ListTile(
-                      leading: SizedBox(
-                        height: 200,
-                        child: Image.network(
+                      onTap: (){
+                        print(news1[i].title);
+                      },
+                      leading: Container(
+                        child: news1[i].urlToImage != null ? Image.network(
                           news1[i].urlToImage.toString(),
-                          height: 200,
-                          width: 100,
+                          height: double.infinity,
+                          width: 120,
                           fit: BoxFit.cover,
+                        ) : Image.network(
+                          "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                          height: 300,
+                          width: 120,
                         ),
                       ),
                       title: Text(
@@ -146,7 +186,7 @@ class NewsModel {
         author = json['author'],
         description = json['description'],
         url = json['url'],
-        urlToImage = json['urlToImage'],
+        urlToImage = json['urlToImage'] == null ? null : json['urlToImage'],
         publishedAt = json['publishedAt'],
         content = json['content'],
         name = json['name'],

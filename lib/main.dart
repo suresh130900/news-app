@@ -4,7 +4,11 @@ import 'package:get/get.dart';
 import 'home.dart';
 
 void main() {
-  runApp(const GetMaterialApp(home: MyApp(),));
+  runApp(const GetMaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
