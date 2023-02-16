@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class news {
   static Future<Map> getJson() async {
@@ -82,14 +83,20 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
                   scrollDirection: Axis.horizontal,
                   itemBuilder:
                       (BuildContext context,int index) {
-                    return Container(
-                      height: 100,
-                      child: news1[index].urlToImage != null ? Image(
-                        image: NetworkImage(news1[index].urlToImage),
-                      ) : Image.network(
-                        "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
-                        height: 300,
-                        width: 120,
+                    return GestureDetector(
+                      onTap: () {
+                        print(news1[index].url.toString());
+                        launchUrl(Uri.parse(news1[index].url));
+                      },
+                      child: Container(
+                        height: 100,
+                        child: news1[index].urlToImage != null ? Image(
+                          image: NetworkImage(news1[index].urlToImage),
+                        ) : Image.network(
+                          "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                          height: 300,
+                          width: 120,
+                        ),
                       ),
                     );
                   },
@@ -130,42 +137,90 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
                   shrinkWrap: true,
                   itemCount: news1.length,
                   itemBuilder: (BuildContext context, int i) {
-                    return ListTile(
-                      onTap: (){
-                        print(news1[i].title);
+                    return GestureDetector(
+                      onTap: () {
+                        print(news1[i].url.toString());
+                        launchUrl(Uri.parse(news1[i].url));
                       },
-                      leading: Container(
-                        child: news1[i].urlToImage != null ? Image.network(
-                          news1[i].urlToImage.toString(),
-                          height: double.infinity,
-                          width: 120,
-                          fit: BoxFit.cover,
-                        ) : Image.network(
-                          "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
-                          height: 300,
-                          width: 120,
-                        ),
-                      ),
-                      title: Text(
-                        news1[i].title.toString(),
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      subtitle: Text(
-                        news1[i].publishedAt.toString(),
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              child: news1[i].urlToImage != null ? Image.network(
+                                  news1[i].urlToImage.toString()
+                              ):Image.network(
+                                "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                                    height: 310,
+                                     width: 420,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              child: Text(news1[i].title,
+                                style: TextStyle(
+                                  fontSize: 20
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              child: Text(news1[i].publishedAt,
+                                style: TextStyle(
+                                  fontSize: 15
+                                ),
+                              ),
+                            ),
+                          ),
+                          divide(),
+                        ],
                       ),
                     );
+                    // return ListTile(
+                    //   onTap: (){
+                    //     print(news1[i].title);
+                    //   },
+                    //   leading: Container(
+                    //     child: news1[i].urlToImage != null ? Image.network(
+                    //       news1[i].urlToImage.toString(),
+                    //       height: double.infinity,
+                    //       width: 120,
+                    //       fit: BoxFit.cover,
+                    //     ) : Image.network(
+                    //       "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                    //       height: 300,
+                    //       width: 120,
+                    //     ),
+                    //   ),
+                    //   title: Text(
+                    //     news1[i].title.toString(),
+                    //     style: const TextStyle(
+                    //         fontSize: 15,
+                    //         fontWeight: FontWeight.bold,
+                    //         color: Colors.white),
+                    //   ),
+                    //   subtitle: Text(
+                    //     news1[i].publishedAt.toString(),
+                    //     style: const TextStyle(
+                    //         fontSize: 15,
+                    //         fontWeight: FontWeight.normal,
+                    //         color: Colors.white),
+                    //   ),
+                    // );
                   }),
             )
           ],
         ),
       ),
+    );
+  }
+  Widget divide(){
+    return Divider(
+      color: Colors.grey.shade400,
     );
   }
 }
@@ -187,7 +242,8 @@ class NewsModel {
         author = json['author'],
         description = json['description'],
         url = json['url'],
-        urlToImage = json['urlToImage'] == null ? null : json['urlToImage'],
+        urlToImage = json['urlToImage'],
+        //urlToImage = json['urlToImage'] == null ? null : json['urlToImage'],
         publishedAt = json['publishedAt'],
         content = json['content'],
         name = json['name'],
