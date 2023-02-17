@@ -1,20 +1,7 @@
-
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-
-class news {
-  static Future<Map> getJson() async {
-    const api_key = "b23bfed3b089427988cda197c8292b52";
-    const api_endpoint =
-        "https://newsapi.org/v2/top-headlines?country=in&apiKey=$api_key";
-    final apiResponse = await http.get(Uri.parse(api_endpoint));
-    return json.decode(apiResponse.body);
-  }
-}
-
+import 'package:news_app/services/news.dart';
 
 class HomeInner extends StatefulWidget {
   const HomeInner({Key? key}) : super(key: key);
@@ -23,28 +10,34 @@ class HomeInner extends StatefulWidget {
   State<HomeInner> createState() => _HomeInnerState();
 }
 
-class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMixin {
+class _HomeInnerState extends State<HomeInner>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  news n = Get.put(news());
+  List<String> categories = [
+    "World",
+    "Business",
+    "Sports",
+    "Tech",
+    "HealthCare",
+    "Science"
+  ];
 
-  List<NewsModel> news1 = <NewsModel>[];
-  List<String> categories = ["World","Business","Sports","Tech","HealthCare","Science"];
-
-  fetchMovies() async {
-    var data = await news.getJson();
-
-    setState(() {
-      List<dynamic> results = data['articles'];
-      results.forEach((element) {
-        news1.add(NewsModel.fromJson(element));
-      });
-    });
-  }
+  // fetchMovies() async {
+  //   setState(() {
+  //     List<dynamic> results = data['articles'];
+  //     results.forEach((element) {
+  //       n.nml.add(NewsModel.fromJson(element));
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    fetchMovies();
+    // fetchMovies();
+    n.get_news("");
   }
 
   @override
@@ -55,15 +48,12 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-
             Container(
               child: const Text(
                 "News",
@@ -78,29 +68,30 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
             ),
             SizedBox(
               height: 250,
-              child: PageView.builder(
-                  itemCount: news1.length - 10,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder:
-                      (BuildContext context,int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        print(news1[index].url.toString());
-                        launchUrl(Uri.parse(news1[index].url));
-                      },
-                      child: Container(
-                        height: 100,
-                        child: news1[index].urlToImage != null ? Image(
-                          image: NetworkImage(news1[index].urlToImage),
-                        ) : Image.network(
-                          "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
-                          height: 300,
-                          width: 120,
+              child: Obx(() => PageView.builder(
+                    itemCount: n.nml.length - 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          // print(n.nml[index].url.toString());
+                          launchUrl(Uri.parse(n.nml[index].url));
+                        },
+                        child: Container(
+                          height: 100,
+                          child: n.nml[index].urlToImage != null
+                              ? Image(
+                                  image: NetworkImage(n.nml[index].urlToImage),
+                                )
+                              : Image.network(
+                                  "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                                  height: 300,
+                                  width: 120,
+                                ),
                         ),
-                      ),
-                    );
-                  },
-              ),
+                      );
+                    },
+                  )),
             ),
             Container(
               height: 60,
@@ -108,144 +99,89 @@ class _HomeInnerState extends State<HomeInner> with SingleTickerProviderStateMix
                 shrinkWrap: true,
                 itemCount: categories.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index){
-                  return  Container(
-                      width: 90,
-                      child: GestureDetector(
-                        onTap: () {
-                          print(categories[index]);
-                        },
-                        child: Chip(
-                          padding: EdgeInsets.all(8),
-                          elevation: 20,
-                          shadowColor: Colors.black,
-                          label: Text(
-                            categories[index],
-                            style: TextStyle(
-                                color: Colors.amberAccent.shade100
-                            ),
-                          ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    width: 90,
+                    child: GestureDetector(
+                      onTap: () {
+                        n.get_news(categories[index]);
+                        print(categories[index]);
+                      },
+                      child: Chip(
+                        padding: EdgeInsets.all(8),
+                        elevation: 20,
+                        shadowColor: Colors.black,
+                        label: Text(
+                          categories[index],
+                          style: TextStyle(color: Colors.amberAccent.shade100),
                         ),
                       ),
-                    );
+                    ),
+                  );
                 },
               ),
             ),
             Container(
-              child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: news1.length,
-                  itemBuilder: (BuildContext context, int i) {
-                    return GestureDetector(
-                      onTap: () {
-                        print(news1[i].url.toString());
-                        launchUrl(Uri.parse(news1[i].url));
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                              child: news1[i].urlToImage != null ? Image.network(
-                                  news1[i].urlToImage.toString()
-                              ):Image.network(
-                                "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
-                                    height: 310,
-                                     width: 420,
+              child: Obx(
+                () => ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: n.nml.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      return GestureDetector(
+                        onTap: () {
+                          print(n.nml[i].url.toString());
+                          launchUrl(Uri.parse(n.nml[i].url));
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Container(
+                                child: n.nml[i].urlToImage != null
+                                    ? Image.network(
+                                        n.nml[i].urlToImage.toString())
+                                    : Image.network(
+                                        "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                                        height: 310,
+                                        width: 420,
+                                      ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                              child: Text(news1[i].title,
-                                style: TextStyle(
-                                  fontSize: 20
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Container(
+                                child: Text(
+                                  n.nml[i].title,
+                                  style: TextStyle(fontSize: 20),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                              child: Text(news1[i].publishedAt,
-                                style: TextStyle(
-                                  fontSize: 15
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Container(
+                                child: Text(
+                                  n.nml[i].publishedAt,
+                                  style: TextStyle(fontSize: 15),
                                 ),
                               ),
                             ),
-                          ),
-                          divide(),
-                        ],
-                      ),
-                    );
-                    // return ListTile(
-                    //   onTap: (){
-                    //     print(news1[i].title);
-                    //   },
-                    //   leading: Container(
-                    //     child: news1[i].urlToImage != null ? Image.network(
-                    //       news1[i].urlToImage.toString(),
-                    //       height: double.infinity,
-                    //       width: 120,
-                    //       fit: BoxFit.cover,
-                    //     ) : Image.network(
-                    //       "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
-                    //       height: 300,
-                    //       width: 120,
-                    //     ),
-                    //   ),
-                    //   title: Text(
-                    //     news1[i].title.toString(),
-                    //     style: const TextStyle(
-                    //         fontSize: 15,
-                    //         fontWeight: FontWeight.bold,
-                    //         color: Colors.white),
-                    //   ),
-                    //   subtitle: Text(
-                    //     news1[i].publishedAt.toString(),
-                    //     style: const TextStyle(
-                    //         fontSize: 15,
-                    //         fontWeight: FontWeight.normal,
-                    //         color: Colors.white),
-                    //   ),
-                    // );
-                  }),
+                            divide(),
+                          ],
+                        ),
+                      );
+                    }),
+              ),
             )
           ],
         ),
       ),
     );
   }
-  Widget divide(){
+
+  Widget divide() {
     return Divider(
       color: Colors.grey.shade400,
     );
   }
-}
-
-
-class NewsModel {
-  var title;
-  var author;
-  var description;
-  var url;
-  var urlToImage;
-  var publishedAt;
-  var content;
-  var name;
-  var source;
-
-  NewsModel.fromJson(Map<String, dynamic> json)
-      : title = json['title'],
-        author = json['author'],
-        description = json['description'],
-        url = json['url'],
-        urlToImage = json['urlToImage'],
-        //urlToImage = json['urlToImage'] == null ? null : json['urlToImage'],
-        publishedAt = json['publishedAt'],
-        content = json['content'],
-        name = json['name'],
-        source  = json['source'];
 }
