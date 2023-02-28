@@ -1,3 +1,7 @@
+//this is the Model we have defined
+//so that the output after calling The API is stored in it
+
+
 class NewsModel {
   var title;
   var author;

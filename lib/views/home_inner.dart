@@ -13,7 +13,10 @@ class HomeInner extends StatefulWidget {
 class _HomeInnerState extends State<HomeInner>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+
+  //this is Creating an Instance
   news n = Get.put(news());
+
   List<String> categories = [
     "World",
     "Business",
@@ -23,14 +26,7 @@ class _HomeInnerState extends State<HomeInner>
     "Science"
   ];
 
-  // fetchMovies() async {
-  //   setState(() {
-  //     List<dynamic> results = data['articles'];
-  //     results.forEach((element) {
-  //       n.nml.add(NewsModel.fromJson(element));
-  //     });
-  //   });
-  // }
+ static var selected;
 
   @override
   void initState() {
@@ -79,15 +75,25 @@ class _HomeInnerState extends State<HomeInner>
                         },
                         child: Container(
                           height: 100,
-                          child: n.nml[index].urlToImage != null
-                              ? Image(
-                                  image: NetworkImage(n.nml[index].urlToImage),
-                                )
-                              : Image.network(
-                                  "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
-                                  height: 300,
-                                  width: 120,
-                                ),
+
+                          child: n.top[index].urlToImage != null
+                          ? Image(
+                            image:NetworkImage(n.top[index].urlToImage),
+                          )
+                              :Image.network(
+                      "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                              height: 300,
+                               width: 120,
+                          ),
+                          // child: n.nml[index].urlToImage != null
+                          //     ? Image(
+                          //         image: NetworkImage(n.nml[index].urlToImage),
+                          //       )
+                          //     : Image.network(
+                          //         "https://thumbs.dreamstime.com/b/world-technology-science-news-background-connection-digital-wires-circle-dots-map-143218024.jpg",
+                          //         height: 300,
+                          //         width: 120,
+                          //       ),
                         ),
                       );
                     },
@@ -104,6 +110,9 @@ class _HomeInnerState extends State<HomeInner>
                     width: 90,
                     child: GestureDetector(
                       onTap: () {
+                        selected = categories[index];
+                        print("printing the Selected Text");
+                        print(selected);
                         n.get_news(categories[index]);
                         print(categories[index]);
                       },
@@ -121,6 +130,15 @@ class _HomeInnerState extends State<HomeInner>
                 },
               ),
             ),
+
+            Container(
+              child: Text("$selected",
+                style: TextStyle(
+                  fontSize: 30,
+                    color: Colors.amberAccent.shade100),
+              ),
+            ),
+
             Container(
               child: Obx(
                 () => ListView.builder(

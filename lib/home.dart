@@ -1,10 +1,18 @@
-import 'dart:convert';
+//this is the Base page for everything
+//the other pages will load into this page
+
+
+// import 'dart:convert';
+// import 'package:get/get.dart';
+// import 'package:http/http.dart' as http;
+
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:news_app/views/home_inner.dart';
 import 'package:news_app/views/profile.dart';
 import 'package:news_app/views/search.dart';
+
+
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -57,6 +65,8 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
+
+            //this is Drawer
             DrawerHeader(
                 child: Text("Menu",
                   style: TextStyle(color: Colors.white, fontSize: 25),
@@ -97,6 +107,8 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
           ],
         ),
       ),
+
+      //Bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
         //this will change the colour and style of the
         currentIndex: index,
@@ -168,15 +180,20 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
         ],
         //backgroundColor: Colors.white,
       ),
+
+      //this is defining so that the page load into itself only
       body: IndexedStack(
         index: index,
         children: [
+          //the main News Page
           HomeInner(),
           Center(
+            //this is the page where Search Is Done
             child: search(),
           ),
           //HomeInner(),
           Center(
+            //this is the Profle Page
             child: profile(),
           )
         ],
