@@ -1,18 +1,8 @@
-//this is the Base page for everything
-//the other pages will load into this page
-
-
-// import 'dart:convert';
-// import 'package:get/get.dart';
-// import 'package:http/http.dart' as http;
-
 
 import 'package:flutter/material.dart';
 import 'package:news_app/views/home_inner.dart';
 import 'package:news_app/views/profile.dart';
 import 'package:news_app/views/search.dart';
-
-
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -201,3 +191,6 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
     );
   }
 }
+
+
+
