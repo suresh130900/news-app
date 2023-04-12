@@ -50,7 +50,7 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       //for the buttons on the bottom
       drawer: Drawer(
         child: ListView(
@@ -100,6 +100,7 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
 
       //Bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
         //this will change the colour and style of the
         currentIndex: index,
         onTap: (i) {
@@ -113,7 +114,7 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
           BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.home,
-              color: Colors.amberAccent.shade100,
+              color: Colors.blue.shade200,
               size: 30,
             ),
             //displaying icon
@@ -130,7 +131,7 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
             //backgroundColor: Colors.purple.shade300,
             activeIcon: Icon(
               Icons.search,
-                color: Colors.amberAccent.shade100,
+                color: Colors.blue.shade200,
                 size: 30,
             ),
             icon: const Icon(
@@ -144,7 +145,7 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
             //backgroundColor: Colors.purple.shade100,
             activeIcon: Icon(
               Icons.person_outline_outlined,
-              color: Colors.amberAccent.shade100,
+              color: Colors.blue.shade200,
               size: 30,
             ),
             icon: const Icon(

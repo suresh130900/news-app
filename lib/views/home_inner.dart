@@ -131,13 +131,6 @@ class _HomeInnerState extends State<HomeInner>
               ),
             ),
 
-            Container(
-              child: Text("$selected",
-                style: TextStyle(
-                  fontSize: 30,
-                    color: Colors.amberAccent.shade100),
-              ),
-            ),
 
             Container(
               child: Obx(
