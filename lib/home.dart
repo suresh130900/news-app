@@ -158,6 +158,7 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
         ],
       ),
       appBar: AppBar(
+        backgroundColor: Colors.black,
         elevation: 0,
         title: const Text("Latest News"),
         actions: <Widget>[
@@ -169,7 +170,6 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
             ),
           ),
         ],
-        //backgroundColor: Colors.white,
       ),
 
       //this is defining so that the page load into itself only
