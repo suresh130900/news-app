@@ -40,7 +40,7 @@ class news extends GetxController {
     loading = false;
 
 
-    var top_headline_api = "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=$api_key";
+    var top_headline_api = "https://newsapi.org/v2/top-headlines?country=us&apiKey=$api_key";
     final top_response = await http.get(Uri.parse(top_headline_api));
     List<NewsModel> top_headlines =
     (jsonDecode(top_response.body)["articles"] as List)
@@ -49,8 +49,4 @@ class news extends GetxController {
 
     top.value = top_headlines;
   }
-
-  // top_headlines() {
-  //   var top_headline_api = "https://newsapi.org/v2/top-headlines?country=in&apiKey=$api_key";
-  // }
 }

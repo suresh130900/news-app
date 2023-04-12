@@ -56,11 +56,18 @@ class _HomeInnerState extends State<HomeInner>
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.black),
               ),
             ),
             const Divider(
-              color: Colors.white,
+              color: Colors.black,
+              thickness: 2,
+            ),
+            Text("Headlines",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold
+              ),
             ),
             SizedBox(
               height: 250,
@@ -71,7 +78,9 @@ class _HomeInnerState extends State<HomeInner>
                       return GestureDetector(
                         onTap: () {
                           // print(n.nml[index].url.toString());
-                          launchUrl(Uri.parse(n.nml[index].url));
+                          launchUrl(Uri.parse(n.top[index].url));
+
+                          print(n.top[index].url);
                         },
                         child: Container(
                           height: 100,
@@ -119,10 +128,10 @@ class _HomeInnerState extends State<HomeInner>
                       child: Chip(
                         padding: EdgeInsets.all(8),
                         elevation: 20,
-                        shadowColor: Colors.black,
+                        //shadowColor: Colors.black,
                         label: Text(
                           categories[index],
-                          style: TextStyle(color: Colors.amberAccent.shade100),
+                          style: TextStyle(color: Colors.blue.shade200),
                         ),
                       ),
                     ),
