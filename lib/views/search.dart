@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/services/category_news.dart';
+import 'package:news_app/views/categories_data.dart';
 
 
 class search extends StatefulWidget {
@@ -11,9 +13,10 @@ class search extends StatefulWidget {
 
 class _searchState extends State<search> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  category_news cat_news = Get.put(category_news());
 
-  List<String> categories = ["World","Business","Tech","Science","HealthCare","Sports","Accounting",
-    "Advertising & Marketing", "Banking & Finance","Art & Culture", "Books & Literature","Fitness & Wellbeing","Adventure & Outdoors",];
+  List<String> categories = ["world","business","tech","Science","HealthCare","Sports","Accounting",
+    "Marketing", "Banking","Art & Culture", "Books","Literature","Fitness","Outdoors",];
   
   @override
   void initState() {
@@ -82,8 +85,9 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
                 itemBuilder: (BuildContext context , int index){
                   return ListTile(
                     onTap: (){
-
                       print(categories[index]);
+                      cat_news.get_news(categories[index]);
+                      Get.to(categories_data());
                     },
                     title: Text(
                       categories[index],
