@@ -33,6 +33,7 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
         body: SingleChildScrollView(
         child: Column(
             children: <Widget> [
@@ -40,6 +41,7 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
                 padding: EdgeInsets.all(12.0),
                 child: Text("Search",
                 style: TextStyle(
+                  color: Colors.white,
                 fontSize: 40,
                 fontWeight: FontWeight.bold
                 ),
@@ -53,7 +55,7 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
                         cursorColor: Colors.grey,
                         cursorHeight: 25,
                         decoration: InputDecoration(
-                          fillColor: Colors.black,
+                          fillColor: Colors.grey.shade400,
                           filled: true,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -61,7 +63,7 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
                           ),
                           hintText: 'Search',
                             hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: Colors.white,
                                 fontSize: 20
                             ),
                           prefixIcon: Container(
@@ -69,7 +71,7 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
                             width: 10,
                             child: Icon(
                               Icons.search_rounded,
-                              color: Colors.grey,
+                              color: Colors.white,
                               size: 28,
                             ),
                           )
@@ -91,9 +93,13 @@ class _searchState extends State<search> with SingleTickerProviderStateMixin {
                     },
                     title: Text(
                       categories[index],
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
                     ),
                     trailing: Icon(
                       Icons.navigate_next,
+                      color: Colors.white,
                     ),
                   );
               },

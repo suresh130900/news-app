@@ -45,6 +45,7 @@ class _HomeInnerState extends State<HomeInner>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -56,7 +57,7 @@ class _HomeInnerState extends State<HomeInner>
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color: Colors.white),
               ),
             ),
             const Divider(
@@ -65,6 +66,7 @@ class _HomeInnerState extends State<HomeInner>
             ),
             Text("Headlines",
               style: TextStyle(
+                color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold
               ),
@@ -79,7 +81,6 @@ class _HomeInnerState extends State<HomeInner>
                         onTap: () {
                           // print(n.nml[index].url.toString());
                           launchUrl(Uri.parse(n.top[index].url));
-
                           print(n.top[index].url);
                         },
                         child: Container(
@@ -109,6 +110,7 @@ class _HomeInnerState extends State<HomeInner>
                   )),
             ),
             Container(
+
               height: 60,
               child: ListView.builder(
                 shrinkWrap: true,
@@ -126,6 +128,7 @@ class _HomeInnerState extends State<HomeInner>
                         print(categories[index]);
                       },
                       child: Chip(
+                        backgroundColor: Colors.black,
                         padding: EdgeInsets.all(8),
                         elevation: 20,
                         //shadowColor: Colors.black,
@@ -173,7 +176,7 @@ class _HomeInnerState extends State<HomeInner>
                               child: Container(
                                 child: Text(
                                   n.nml[i].title,
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 20,color: Colors.white),
                                 ),
                               ),
                             ),
@@ -182,7 +185,7 @@ class _HomeInnerState extends State<HomeInner>
                               child: Container(
                                 child: Text(
                                   n.nml[i].publishedAt,
-                                  style: TextStyle(fontSize: 15),
+                                  style: TextStyle(fontSize: 15,color: Colors.white),
                                 ),
                               ),
                             ),

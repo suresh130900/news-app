@@ -11,7 +11,7 @@ class signup_service extends GetxController {
   var error = false.obs;
   Future signup_user(String email, String password) async {
     final response = await http.post(
-      Uri.parse("http://172.17.0.1:8081/user/signup"),
+      Uri.parse("http://10.125.11.117:8081/user/signup"),
       headers : {
         'accept': 'application/json',
         'Content-Type': 'application/json'

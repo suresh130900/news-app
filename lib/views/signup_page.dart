@@ -32,6 +32,7 @@ class _signupState extends State<signup> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
           child: Column(
             children: [
@@ -46,9 +47,27 @@ class _signupState extends State<signup> with SingleTickerProviderStateMixin {
                       height: 30,
                     ),
                      TextField(
+                       style: TextStyle(
+                         color: Colors.white
+                       ),
                       controller: email_controller,
                       decoration: InputDecoration(
-                        labelText: "Email",
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                            width: 1.0,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                            width: 2.0,
+                          ),
+                        ),
+                        hintText: "Email",
+                        hintStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -56,12 +75,29 @@ class _signupState extends State<signup> with SingleTickerProviderStateMixin {
                       height: 30,
                     ),
                      TextField(
+                       style: TextStyle(color: Colors.white),
                        controller: password_controller,
                       obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: "PassWord",
-                        border: OutlineInputBorder()
-                      ),
+                       decoration: InputDecoration(
+
+                         enabledBorder: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(5),
+                           borderSide: BorderSide(
+                             color: Colors.white,
+                             width: 1.0,
+                           ),
+                         ),
+                         focusedBorder: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(30),
+                           borderSide: BorderSide(
+                             color: Colors.blue,
+                             width: 2.0,
+                           ),
+                         ),
+                         hintText: 'ENTER PASSWORD',
+
+                         hintStyle: TextStyle(color: Colors.white),
+                       ),
                     ),
                     const SizedBox(
                       height: 30,

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:news_app/views/login_page.dart';
 
 class profile extends StatefulWidget {
   const profile({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -59,13 +62,25 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
                               "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png",
                             ),
                           ),
-                          title: Text("HELLO SURESH"),
-                          subtitle: Text("Suresh@gmail.com"),
+                          title: Text("HELLO SURESH",
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          ),
+                          subtitle: Text("Suresh@gmail.com",
+                          style: TextStyle(
+                              color: Colors.white
+                          ),
+                          ),
                           trailing: MaterialButton(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)
                             ),
-                            child: Text("Edit Profile"),
+                            child: Text("Edit Profile",
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                            ),
                             textColor: Colors.amberAccent.shade100,
                             color: Colors.grey,
                             onPressed: (){
@@ -87,15 +102,18 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
                     print("Favrourite Button is Pressed");
                   },
                   leading: Icon(
-                    Icons.favorite_border
+                    Icons.favorite_border,
+                    color: Colors.white,
                   ),
                   title: Text("Favourites",
                     style: TextStyle(
                         fontSize: 18,
+                      color: Colors.white
                     ),
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios_rounded,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -110,14 +128,17 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
                   },
                   leading: Icon(
                       CupertinoIcons.globe,
+                    color: Colors.white,
                   ),
                   title: Text("Language",
                     style: TextStyle(
                       fontSize: 18,
+                      color: Colors.white
                     ),
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios_rounded,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -131,15 +152,18 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
                     print("Location Button is Pressed");
                   },
                   leading: Icon(
-                      Icons.pin_drop
+                      Icons.pin_drop,
+                    color: Colors.white,
                   ),
                   title: Text("Location",
                     style: TextStyle(
                       fontSize: 18,
+                      color: Colors.white
                     ),
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios_rounded,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -149,13 +173,20 @@ class _profileState extends State<profile> with SingleTickerProviderStateMixin {
             ListTile(
               onTap: (){
                 print("Logout Button is Pressed");
+                Get.to(login());
               },
               leading: Icon(
                 Icons.logout,
+                color: Colors.white,
               ),
-              title: Text("Logout"),
+              title: Text("Logout",
+                style: TextStyle(
+                    color: Colors.white
+                ),
+              ),
               trailing: Icon(
                 Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
               ),
             ),
           ],

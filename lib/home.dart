@@ -11,22 +11,22 @@ class home extends StatefulWidget {
   State<home> createState() => _homeState();
 }
 
-class MyThemeApp {
-  static ThemeData appThemeDark() {
-    return ThemeData(
-      brightness: Brightness.dark,
-      appBarTheme: const AppBarTheme(
-        color: Colors.black,
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-      ),
-      iconTheme: const IconThemeData(
-        color: Colors.white,
-      ),
-    );
-  }
-}
+// class MyThemeApp {
+//   static ThemeData appThemeDark() {
+//     return ThemeData(
+//       brightness: Brightness.dark,
+//       appBarTheme: const AppBarTheme(
+//         color: Colors.black,
+//         iconTheme: IconThemeData(
+//           color: Colors.white,
+//         ),
+//       ),
+//       iconTheme: const IconThemeData(
+//         color: Colors.white,
+//       ),
+//     );
+//   }
+// }
 
 class _homeState extends State<home> with SingleTickerProviderStateMixin {
   //for color swicthing
@@ -53,9 +53,9 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
       //backgroundColor: Colors.black,
       //for the buttons on the bottom
       drawer: Drawer(
+        backgroundColor: Colors.black,
         child: ListView(
           children: <Widget>[
-
             //this is Drawer
             DrawerHeader(
                 child: Text("Menu",
@@ -73,8 +73,11 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
               },
               leading: Icon(
                 Icons.input,
+                color: Colors.white,
               ),
-              title: Text("Welcome"),
+              title: Text("Welcome",
+              style: TextStyle(color: Colors.white),
+              ),
             ),
             ListTile(
               onTap: (){
@@ -82,8 +85,13 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
               },
               leading: Icon(
                 Icons.settings,
+                color: Colors.white,
               ),
-              title: Text("Settings"),
+              title: Text("Settings",
+              style: TextStyle(
+                  color: Colors.white
+              ),
+              ),
             ),
             ListTile(
               onTap: (){
@@ -91,8 +99,13 @@ class _homeState extends State<home> with SingleTickerProviderStateMixin {
               },
               leading: Icon(
                 Icons.border_color,
+                color: Colors.white,
               ),
-              title: Text("Feedback"),
+              title: Text("Feedback",
+              style: TextStyle(
+                  color: Colors.white
+              ),
+              ),
             ),
           ],
         ),

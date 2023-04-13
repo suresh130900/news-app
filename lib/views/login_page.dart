@@ -17,7 +17,10 @@ class _loginState extends State<login> with SingleTickerProviderStateMixin {
   login_service login_per = Get.put(login_service());
   final TextEditingController email_controller = TextEditingController();
   final TextEditingController pass_controller = TextEditingController();
+  bool is_error = false;
 
+  //displaying a message on the screen
+  String error_msg = "";
 
   @override
   void initState() {
@@ -48,21 +51,71 @@ class _loginState extends State<login> with SingleTickerProviderStateMixin {
                   SizedBox(
                     height: 30,
                   ),
+                  Text(error_msg,
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   TextField(
+                    onChanged: (email){
+                      print(email);
+                      validate_email(email);
+                    },
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
                     controller: email_controller,
                     decoration: InputDecoration(
-                      labelText: "Email",
-                      border: OutlineInputBorder()
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                      ),
+                      hintText: "Email",
+                      hintStyle: TextStyle(color: Colors.white),
+                      border: OutlineInputBorder(),
                     ),
                   ),
                   SizedBox(
                     height: 30,
                   ),
                   TextField(
+                    onChanged: (email) {
+
+                    },
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
                     controller: pass_controller,
-                    obscureText: true,
                     decoration: InputDecoration(
-                      labelText: "PassWord",
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                      ),
+                      hintText: "Password",
+                      hintStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -124,5 +177,31 @@ class _loginState extends State<login> with SingleTickerProviderStateMixin {
         )
       ),
     );
+  }
+  void validate_email(String email) {
+    // regex pattern
+    String patttern = r'(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)';
+    RegExp regExp = new RegExp(patttern);
+    if (email.length == 0) {
+      //setting the state
+      setState(() {
+        is_error = true;
+        error_msg = "Please enter email number";
+        print("enter email");
+      });
+      print("enter email");
+    } else if (!regExp.hasMatch(email)) {
+      setState(() {
+        is_error = true;
+        error_msg = "Please enter valid Email Address";
+      });
+    } else if (email.length > 10) {
+      setState(() {
+        is_error = false;
+        error_msg = "Done";
+      });
+      print("done");
+    }
+    return null;
   }
 }

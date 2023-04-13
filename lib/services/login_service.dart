@@ -11,7 +11,7 @@ class login_service extends GetxController{
 
   Future<login_person> verify_login(String email, String password) async {
     final response = await http.post(
-        Uri.parse("http://172.17.0.1:8081/user/login"),
+        Uri.parse("http://10.125.11.117:8081/user/login"),
         headers : {
           'accept': 'application/json',
           'Content-Type': 'application/json'
@@ -27,6 +27,7 @@ class login_service extends GetxController{
 
         success = jsonDecode(response.body);
         error.value = success['error'];
+
         return login_person.fromJson(jsonDecode(response.body));
       }
     else {

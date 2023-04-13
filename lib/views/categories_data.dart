@@ -30,6 +30,7 @@ class _categories_dataState extends State<categories_data> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -65,7 +66,7 @@ class _categories_dataState extends State<categories_data> with SingleTickerProv
                               child: Container(
                                 child: Text(
                                   cat_news.cat[i].title,
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 20,color: Colors.white),
                                 ),
                               ),
                             ),
@@ -74,7 +75,7 @@ class _categories_dataState extends State<categories_data> with SingleTickerProv
                               child: Container(
                                 child: Text(
                                   cat_news.cat[i].publishedAt,
-                                  style: TextStyle(fontSize: 15),
+                                  style: TextStyle(fontSize: 15,color: Colors.white),
                                 ),
                               ),
                             ),
